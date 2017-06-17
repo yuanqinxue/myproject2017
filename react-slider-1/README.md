@@ -47,12 +47,36 @@ module.exports = {
         path: path.resolve('build'),// 输出目录
         filename: 'bundle.js'//输出的文件名
     },
+    module:{
+      loaders:[
+          {
+              test:/\.js$/,
+              loader:'babel-loader',
+              exclude:/node_modules/
+          },
+          {
+              test:/\.less$/,
+              loader:'style-loader!css-loader!less-loader'
+          },
+          {
+              test:/\.(jpg|pnp|gif)$/,
+              loader:'url-loader'
+          }
+      ]
+    },
     plugins:[
         new HtmlWebpackPlugin({
             template:'./src/index.html'
         })
     ]
 };
+```
+
+### 编辑配置 .babelrc 文件
+```
+{
+  "presets": ["es2015","stage-0","react"]
+}
 ```
 
 ### index.html 入口html页面
